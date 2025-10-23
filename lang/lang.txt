@@ -1,0 +1,40 @@
+import clash
+
+fn my_fun(arg: dtype) {
+
+}
+
+Option Opt_Exec {
+    name: "e"
+    long_name: "exec"
+    help: "Executable to exec"
+    optional: True
+}
+
+//  is defined
+if Opt_Exec? {
+
+}
+
+Args : [str]
+Options: [Option]
+
+for opt in Options {
+    Option_Name(opt) -> "e"
+    @e -> "e"
+
+}
+
+env_var_home = ${HOME}
+${HOME} = env_var_home
+
+bash_cmd_output = `ls -a` : [str]
+script_output = 
+
+`ls -a`
+
+
+"my-${HOME}-str" -> "my-/home/balint-str"
+
+"my-{bash_cmd_output + "e"}-str"
+
