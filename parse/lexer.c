@@ -27,11 +27,22 @@ static void tokenize_sub_str(str_view view, token_queue *tokens)
         }
         --prefix.len;
     }
-    lexical_error("could not tokenize");
+
+    lexical_error("Could not tokenize");
+}
+
+static void remove_trailing_endline(char *line)
+{
+    int i = 0;
+    while (line[i] != '\n' && line[i] != '\0') {
+        ++i;
+    }
+    line[i] = '\0';
 }
 
 void tokenize_line(char *line, token_queue *tokens)
 {
+    remove_trailing_endline(line);
     char *tok = strtok(line, " ");
     while (tok != NULL) {
         str_view view = view_str(tok, 0, strlen(tok));
@@ -48,9 +59,4 @@ token_queue *tokenize_file(FILE *file)
         tokenize_line(line_buff, queue);
     }
     return queue;
-}
-
-void lexer_test()
-{
-    
 }

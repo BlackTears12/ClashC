@@ -7,6 +7,4 @@
 token_queue *tokenize_file(FILE *file);
 void tokenize_line(char *line, token_queue *tokens);
 
-void lexer_test();
-
 #endif // LEXER_H

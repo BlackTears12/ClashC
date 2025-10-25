@@ -5,13 +5,18 @@
 
 void lexical_error(char *msg)
 {
-    printf("%s", msg);
+    printf("%s\n", msg);
     exit(1);
 }
 
-void fatal_error(char *msg) {}
-
-void syntax_error(char *msg)
+void fatal_error(char *msg)
 {
-    lexical_error(msg);
+    printf("FATAL %s\n", msg);
+    exit(1);
+}
+
+void log_msg(char *msg)
+{
+    printf("%s\n", msg);
+    fflush(stdout);
 }

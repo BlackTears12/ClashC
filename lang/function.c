@@ -1,5 +1,25 @@
 #include "function.h"
 #include "diagnostics.h"
+#include "util.h"
+
+VECT_GENERATE_TYPE(symbol_ptr)
+
+function_node* function_node_init(symbol_ptr id)
+{
+    function_node* func = STRUCT_ALLOC(function_node);
+    func->params = vect_init_symbol_ptr(DEFAULT_ARGUMENT_CAPACITY);
+    func->body = ast_st_block_alloc();
+    return func;
+}
+
+void function_node_destroy(function_node* func)
+{
+    vect_free(func->params);
+    ast_st_block_destroy(func->body);
+    free(func);
+}
+
+void func_add_param(function_node* func, symbol_ptr param) {}
 
 typedef struct function_map_entry
 {

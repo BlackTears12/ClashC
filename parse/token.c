@@ -1,14 +1,50 @@
 #include "token.h"
+#include "util.h"
 
 #include <ctype.h>
 #include <malloc.h>
 
 #define INITAL_QUEUE_SIZE 10
+#define SYMBOL_TOKENS_AMOUNT SYMBOL_TOKENS_END
+#define KEYWORD_TOKENS_AMOUNT (KEYWORD_TOKENS_END - SYMBOL_TOKENS_END - 1)
+#define KEYWORD_TOKENS_OFFSET SYMBOL_TOKENS_AMOUNT + 1
 
-static char SINGLE_CHAR_TOKENS[SINGLE_CHAR_TOKEN_END]
+static char SYMBOL_TOKENS[SYMBOL_TOKENS_END]
     = {'(', ')', '{', '}', '[', ']', '?', '=', ':', ',', '+', '-', '*', '/'};
 
-static char *MULTI_CHAR_TOKENS[MULTI_CHAR_TOKEN_END] = {"fn", "option", "True", "False"};
+static char *KEYWORD_TOKENS[KEYWORD_TOKENS_AMOUNT] = {"fn", "option", "->"};
+
+static char *TOKEN_TYPE_STR_REPR[] = {
+    "TOK_L_BRACKET",
+    "TOK_R_BRACKET",
+    "TOK_LC_BRACKET",
+    "TOK_RC_BRACKET",
+    "TOK_LSQ_BRACKET",
+    "TOK_RSQ_BRACKET",
+    "TOK_QUESTION_MARK",
+    "TOK_EQUALS",
+    "TOK_COLON",
+    "TOK_COMMA",
+    "TOK_PLUS",
+    "TOK_MINUS",
+    "TOK_MULTIPLY",
+    "TOK_DIVIDE",
+
+    "SYMBOL_TOKENS_END",
+
+    "TOK_FN",
+    "TOK_OPTION",
+    "TOK_ARROW",
+
+    "KEYWORD_TOKENS_END",
+
+    "TOK_BOOL",
+    "TOK_INTEGER",
+    "TOK_FLOATING",
+    "TOK_STR_LITERAL",
+    "TOK_IDENTIFIER",
+    "TOKEN_ERROR",
+};
 
 static token_type is_single_char_token(char tok);
 static token_type is_multi_char_token(str_view view);
@@ -93,13 +129,13 @@ token_type is_token(str_view view)
 
 void print_token(token t)
 {
-    printf("%d - %s\n", t.type, view_symbol(t.symbol).str);
+    printf("%s - %s\n", TOKEN_TYPE_STR_REPR[t.type], view_symbol(t.symbol).str);
 }
 
 static token_type is_single_char_token(char tok)
 {
-    for (int i = 0; i < SINGLE_CHAR_TOKEN_END; i++) {
-        if (SINGLE_CHAR_TOKENS[i] == tok) {
+    for (int i = 0; i < SYMBOL_TOKENS_AMOUNT; i++) {
+        if (SYMBOL_TOKENS[i] == tok) {
             return (token_type) i;
         }
     }
@@ -108,9 +144,9 @@ static token_type is_single_char_token(char tok)
 
 static token_type is_multi_char_token(str_view view)
 {
-    for (int i = 0; i < MULTI_CHAR_TOKEN_END - SINGLE_CHAR_TOKEN_END - 1; i++) {
-        if (str_view_equals_str(view, MULTI_CHAR_TOKENS[i])) {
-            return (token_type) i;
+    for (int i = 0; i < KEYWORD_TOKENS_AMOUNT - 1; i++) {
+        if (str_view_equals_str(view, KEYWORD_TOKENS[i])) {
+            return (token_type) i + KEYWORD_TOKENS_OFFSET;
         }
     }
     return TOKEN_ERROR;

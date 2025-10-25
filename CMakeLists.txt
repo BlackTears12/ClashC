@@ -9,7 +9,7 @@ add_executable(ClashC
     lib/vector.h
     lang/ast_expr.h
     lang/function.h
-    lang/ast_stment.h
+    lang/ast_stmt.h
     lang/ast.h
     parse/lexer.h
     parse/lexer.c
@@ -24,8 +24,11 @@ add_executable(ClashC
     lang/symbol.c
     lang/ast_expr.c
     lib/vector.c
-    lang/ast_stment.c
-    lib/alloc.h
+    lang/ast_stmt.c
+    lib/util.h
+    lib/util.c
+    lang/lang.h
+
 )
 
 include(GNUInstallDirs)
