@@ -1,0 +1,7 @@
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/ClashC.dir
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/edit_cache.dir
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/rebuild_cache.dir
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/list_install_components.dir
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/install.dir
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/install/local.dir
+/home/ext-szombatb/Projects/ClashC/CMakeFiles/install/strip.dir

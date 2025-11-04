@@ -1,5 +1,6 @@
 #include "lexer.h"
 #include "diagnostics.h"
+#include <ctype.h>
 #include <string.h>
 
 #define MAX_CHARS_PER_LINE 256
@@ -31,20 +32,25 @@ static void tokenize_sub_str(str_view view, token_queue *tokens)
     lexical_error("Could not tokenize");
 }
 
-static void remove_trailing_endline(char *line)
+static char *strip_cstr(char *line)
 {
-    int i = 0;
-    while (line[i] != '\n' && line[i] != '\0') {
-        ++i;
+    int start = 0;
+    while (isspace(line[start]) && line[start] != '\0') {
+        ++start;
     }
-    line[i] = '\0';
+    int end = start;
+    while (!isspace(line[end]) && line[end] != '\0') {
+        ++end;
+    }
+    line[end] = '\0';
+    return line + start;
 }
 
 void tokenize_line(char *line, token_queue *tokens)
 {
-    remove_trailing_endline(line);
     char *tok = strtok(line, " ");
     while (tok != NULL) {
+        tok = strip_cstr(tok);
         str_view view = view_str(tok, 0, strlen(tok));
         tokenize_sub_str(view, tokens);
         tok = strtok(NULL, " ");

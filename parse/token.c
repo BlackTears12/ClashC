@@ -145,7 +145,7 @@ static token_type is_single_char_token(char tok)
 static token_type is_multi_char_token(str_view view)
 {
     for (int i = 0; i < KEYWORD_TOKENS_AMOUNT - 1; i++) {
-        if (str_view_equals_str(view, KEYWORD_TOKENS[i])) {
+        if (str_view_equals_cstr(view, KEYWORD_TOKENS[i])) {
             return (token_type) i + KEYWORD_TOKENS_OFFSET;
         }
     }

@@ -52,10 +52,11 @@ void ast_fcall_add_arg(ast_fcall *fcall, ast_expression arg);
 
 typedef struct ast_command
 {
+    symbol_ptr cmd;
     vect_ast_expression *args;
 } ast_command;
 
-ast_command *ast_command_alloc();
+ast_command *ast_command_alloc(symbol_ptr cmd);
 void ast_command_destroy(ast_command *cmd);
 void ast_command_add_arg(ast_command *cmd, ast_expression arg);
 

@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 #define STRUCT_ALLOC(strct) malloc(sizeof(strct))
 
@@ -20,5 +21,9 @@
 #define FOR_EACH_LEN(idx, list, len) for (int idx = 0; idx < view.len; idx++)
 
 #define FOR_EACH(idx, view) FOR_EACH_LEN(idx, view, len)
+
+int pow_of_ten(size_t pw);
+int char_to_int(char c);
+int sign(int i);
 
 #endif // UTIL_H

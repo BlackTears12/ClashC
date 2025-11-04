@@ -1,6 +1,6 @@
 import clash
 
-fn my_fun(arg: dtype) {
+fn my_fun(arg) {
 
 }
 

@@ -10,4 +10,6 @@ void init_symbol_table();
 symbol_ptr register_symbol(str_view view);
 str_view view_symbol(symbol_ptr sym);
 
+char* str_symbol(symbol_ptr sym);
+
 #endif // SYMBOL_H

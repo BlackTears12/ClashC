@@ -17,6 +17,7 @@ static void symbol_from_str_view(symbol *sym, str_view view)
 {
     memcpy(sym->str, view.str, view.len);
     sym->len = view.len;
+    sym->str[sym->len] = '\0';
 }
 
 typedef struct symbol_table
@@ -40,7 +41,7 @@ void symbol_table_init()
 symbol_ptr register_symbol(str_view view)
 {
     for (symbol_ptr i = 0; i < symbol_table_instance.len; i++) {
-        if (str_view_equals_str(view, symbol_table_instance.data[i].str)) {
+        if (str_view_equals_cstr(view, symbol_table_instance.data[i].str)) {
             return i;
         }
     }
@@ -61,3 +62,5 @@ str_view view_symbol(symbol_ptr sym)
     symbol *symbol = &symbol_table_instance.data[sym];
     return view_str(symbol->str, 0, symbol->len);
 }
+
+char *str_symbol(symbol_ptr sym) {}

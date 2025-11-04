@@ -7,6 +7,7 @@ VECT_GENERATE_TYPE(symbol_ptr)
 function_node* function_node_init(symbol_ptr id)
 {
     function_node* func = STRUCT_ALLOC(function_node);
+    func->id = id;
     func->params = vect_init_symbol_ptr(DEFAULT_ARGUMENT_CAPACITY);
     func->body = ast_st_block_alloc();
     return func;

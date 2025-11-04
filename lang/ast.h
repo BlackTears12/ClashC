@@ -4,4 +4,4 @@
 #include "ast_expr.h"
 #include "ast_stmt.h"
 
-#endif // AST_H
+#endif

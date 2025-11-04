@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/ClashC.dir/exec/exec_engine.c.o"
+  "CMakeFiles/ClashC.dir/exec/exec_engine.c.o.d"
+  "CMakeFiles/ClashC.dir/exec/runtime_storage.c.o"
+  "CMakeFiles/ClashC.dir/exec/runtime_storage.c.o.d"
+  "CMakeFiles/ClashC.dir/exec/runtime_val.c.o"
+  "CMakeFiles/ClashC.dir/exec/runtime_val.c.o.d"
+  "CMakeFiles/ClashC.dir/lang/ast_expr.c.o"
+  "CMakeFiles/ClashC.dir/lang/ast_expr.c.o.d"
+  "CMakeFiles/ClashC.dir/lang/ast_stmt.c.o"
+  "CMakeFiles/ClashC.dir/lang/ast_stmt.c.o.d"
+  "CMakeFiles/ClashC.dir/lang/ast_visit.c.o"
+  "CMakeFiles/ClashC.dir/lang/ast_visit.c.o.d"
+  "CMakeFiles/ClashC.dir/lang/function.c.o"
+  "CMakeFiles/ClashC.dir/lang/function.c.o.d"
+  "CMakeFiles/ClashC.dir/lang/symbol.c.o"
+  "CMakeFiles/ClashC.dir/lang/symbol.c.o.d"
+  "CMakeFiles/ClashC.dir/lib/diagnostics.c.o"
+  "CMakeFiles/ClashC.dir/lib/diagnostics.c.o.d"
+  "CMakeFiles/ClashC.dir/lib/str.c.o"
+  "CMakeFiles/ClashC.dir/lib/str.c.o.d"
+  "CMakeFiles/ClashC.dir/lib/util.c.o"
+  "CMakeFiles/ClashC.dir/lib/util.c.o.d"
+  "CMakeFiles/ClashC.dir/lib/vector.c.o"
+  "CMakeFiles/ClashC.dir/lib/vector.c.o.d"
+  "CMakeFiles/ClashC.dir/main.c.o"
+  "CMakeFiles/ClashC.dir/main.c.o.d"
+  "CMakeFiles/ClashC.dir/parse/lexer.c.o"
+  "CMakeFiles/ClashC.dir/parse/lexer.c.o.d"
+  "CMakeFiles/ClashC.dir/parse/parser.c.o"
+  "CMakeFiles/ClashC.dir/parse/parser.c.o.d"
+  "CMakeFiles/ClashC.dir/parse/token.c.o"
+  "CMakeFiles/ClashC.dir/parse/token.c.o.d"
+  "ClashC"
+  "ClashC.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/ClashC.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

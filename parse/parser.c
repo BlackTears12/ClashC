@@ -49,9 +49,9 @@ void parse_context_consume_if(parse_context* cxt, token_type t)
     }
 }
 
-void parse_file(FILE* file)
+function_node* parse_file(FILE* file)
 {
-    parse_context cxt = {.file = file, .func = NULL, .tokens = tokenize_file(file)};
+    parse_context cxt = {.file = file, .main_fn = NULL, .tokens = tokenize_file(file)};
     log_msg("Lexing finished");
 
     while (!token_queue_empty(cxt.tokens)) {
@@ -63,6 +63,7 @@ void parse_file(FILE* file)
     }
 
     log_msg("Parsing finished");
+    return cxt.main_fn;
 }
 
 void syntax_error(char* msg, parse_context* cxt)
@@ -85,6 +86,10 @@ static function_node* parse_fn_decl(parse_context* cxt)
     /* parsing function signature */
     function_node* func = function_node_init(id);
     register_function(func);
+
+    if (str_view_equals_cstr(view_symbol(func->id), "main")) {
+        cxt->main_fn = func;
+    }
 
     /* parsing params */
     parse_context_assert_next_token(cxt, TOK_L_BRACKET);

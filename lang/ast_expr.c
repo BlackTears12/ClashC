@@ -24,11 +24,12 @@ void ast_fcall_add_arg(ast_fcall *fcall, ast_expression arg)
     vect_push_ast_expression(fcall->args, arg);
 }
 
-ast_command *ast_command_alloc()
+ast_command *ast_command_alloc(symbol_ptr cmd)
 {
-    ast_command *cmd = STRUCT_ALLOC(ast_command);
-    cmd->args = vect_init_ast_expression(DEFAULT_ARGUMENT_CAPACITY);
-    return cmd;
+    ast_command *ast_cmd = STRUCT_ALLOC(ast_command);
+    ast_cmd->cmd = cmd;
+    ast_cmd->args = vect_init_ast_expression(DEFAULT_ARGUMENT_CAPACITY);
+    return ast_cmd;
 }
 
 void ast_command_destroy(ast_command *cmd)

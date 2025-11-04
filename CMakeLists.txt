@@ -27,13 +27,23 @@ add_executable(ClashC
     lang/ast_stmt.c
     lib/util.h
     lib/util.c
-    lang/lang.h
+    exec/runtime_val.h
+    exec/runtime_val.c
+    lang/ast_visit.h
+    lang/ast_visit.c
+    exec/exec_engine.h
+    exec/exec_engine.c
+    exec/runtime_storage.h
+    exec/runtime_storage.c
+    exec/proc.h
+    exec/env.h
+    exec/proc.c
 
 )
 
 include(GNUInstallDirs)
 
-include_directories(lib lang parse)
+include_directories(lib lang parse exec)
 
 install(TARGETS ClashC
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

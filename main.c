@@ -1,8 +1,7 @@
-#include "lexer.h"
-#include "parser.h"
+#include "exec_engine.h"
 
 int main()
 {
     FILE* f = fopen("script.csh", "r");
-    parse_file(f);
+    execute_script(f);
 }
