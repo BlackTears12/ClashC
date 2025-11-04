@@ -3,18 +3,21 @@
 #include <unistd.h>
 #include <wait.h>
 
-static string_t get_cmd_binary();
+static char** alloc_arg_buff(vect);
 
-void launch_proc(ast_command* cmd)
+void launch_proc(char* prog)
 {
     pid_t pid = fork();
     if (pid == -1) {
         //ERROR
     }
     if (pid == 0) {
-        execve(cmd.str, );
+        char* args[1] = {prog};
+        execve(prog, args, NULL);
     } else {
         int status;
         wait(&status);
     }
 }
+
+void launch_proc_with_args(char* prog, vect_runtime_val* args) {}

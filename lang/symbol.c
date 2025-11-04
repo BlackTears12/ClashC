@@ -63,4 +63,7 @@ str_view view_symbol(symbol_ptr sym)
     return view_str(symbol->str, 0, symbol->len);
 }
 
-char *str_symbol(symbol_ptr sym) {}
+char *str_symbol(symbol_ptr sym)
+{
+    return symbol_table_instance.data[sym].str;
+}
