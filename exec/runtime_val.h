@@ -42,6 +42,7 @@ runtime_val runtime_val_str(string_t val);
 runtime_val runtime_val_result_ok();
 runtime_val runtime_val_result_err();
 
+runtime_str rt_val_to_str(runtime_val val);
 runtime_val convert_runtime_val(runtime_val val, runtime_val_type t);
 
 #endif // RUNTIME_VAL_H

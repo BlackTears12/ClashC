@@ -39,3 +39,13 @@ static runtime_val runtime_val_from(runtime_val_type t, runtime_val_data d)
 }
 
 runtime_val convert_runtime_val(runtime_val val, runtime_val_type t) {}
+
+runtime_str rt_val_to_str(runtime_val val)
+{
+    switch (val.type) {
+    case RUNTIME_STR:
+        return val.value.str_val;
+    default:
+        break;
+    }
+}
