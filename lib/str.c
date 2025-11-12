@@ -98,4 +98,20 @@ void str_delete(string_t str)
     free(str.str);
 }
 
-string_t str_concat(string_t pre, string_t post) {}
+string_t str_concat(string_t pre, string_t post)
+{
+    size_t len = pre.len + post.len;
+    string_t s = {.str = (char *) malloc(len + 1), .len = len};
+    memcpy(s.str, pre.str, pre.len);
+    memcpy(s.str + pre.len + 1, post.str, post.len);
+    s.str[len] = '\0';
+    return s;
+}
+
+string_t str_merge(string_t pre, string_t post)
+{
+    string_t s = str_concat(pre, post);
+    str_delete(pre);
+    str_delete(post);
+    return s;
+}

@@ -7,6 +7,7 @@
 typedef enum ast_statement_type {
     AST_FCALL_ST = AST_FCALL,
     AST_COMMAND_ST = AST_COMMAND,
+    AST_PIPE_ST = AST_PIPE,
     AST_ASSIGNMENT,
     AST_BLOCK,
     AST_IF_ELSE,
@@ -17,6 +18,7 @@ typedef enum ast_statement_type {
 typedef union ast_statement_data {
     struct ast_fcall *fcall;
     struct ast_command *command;
+    struct ast_pipe *pipe;
     struct ast_assignment *assignment;
     struct ast_st_block *block;
     struct ast_if_else *if_else;

@@ -27,6 +27,7 @@ TYPEDEF_VISITOR_FN(ast_literal)
 TYPEDEF_VISITOR_FN(ast_variable)
 TYPEDEF_VISITOR_FN(ast_binary_op)
 TYPEDEF_VISITOR_FN(ast_command)
+TYPEDEF_VISITOR_FN(ast_pipe);
 TYPEDEF_VISITOR_FN(ast_fcall)
 TYPEDEF_VISITOR_FN(ast_assignment);
 TYPEDEF_VISITOR_FN(ast_st_block);
@@ -37,6 +38,7 @@ typedef struct ast_visitor_fns
     ast_variable_visitor variable;
     ast_binary_op_visitor binary_op;
     ast_command_visitor command;
+    ast_pipe_visitor pipe;
     ast_fcall_visitor fcall;
     ast_assignment_visitor assignment;
     ast_st_block_visitor block;

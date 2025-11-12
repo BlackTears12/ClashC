@@ -5,6 +5,8 @@ VECT_GENERATE_TYPE(ast_expression)
 
 void ast_expression_destroy(ast_expression expr) {}
 
+/* AST FCALL */
+
 ast_fcall *ast_fcall_alloc(symbol_ptr id)
 {
     ast_fcall *fcall = STRUCT_ALLOC(ast_fcall);
@@ -23,6 +25,8 @@ void ast_fcall_add_arg(ast_fcall *fcall, ast_expression arg)
 {
     vect_push_ast_expression(fcall->args, arg);
 }
+
+/* AST COMMMAND */
 
 ast_command *ast_command_alloc(symbol_ptr cmd)
 {
@@ -43,6 +47,24 @@ void ast_command_add_arg(ast_command *cmd, ast_expression arg)
     vect_push_ast_expression(cmd->args, arg);
 }
 
+/* AST PIPE */
+
+ast_pipe *ast_pipe_alloc(ast_command *input, ast_command *output)
+{
+    ast_pipe *p = STRUCT_ALLOC(ast_pipe);
+    p->input = input;
+    p->output = output;
+    return p;
+}
+
+void ast_pipe_destroy(ast_pipe *pipe)
+{
+    ast_command_destroy(pipe->input);
+    ast_command_destroy(pipe->output);
+}
+
+/* AST LITERAL */
+
 ast_literal *ast_literal_alloc(ast_literal_type type, symbol_ptr val)
 {
     ast_literal *lit = STRUCT_ALLOC(ast_literal);
@@ -56,6 +78,8 @@ void ast_literal_destroy(ast_literal *lit)
     free(lit);
 }
 
+/* AST VARIABLE */
+
 ast_variable *ast_variable_alloc(symbol_ptr sym)
 {
     ast_variable *var = STRUCT_ALLOC(ast_variable);
@@ -68,6 +92,8 @@ void ast_variable_destroy(ast_variable *var)
 {
     free(var);
 }
+
+/* AST BINARY OP*/
 
 ast_binary_op *ast_binary_op_alloc(ast_binary_op_type type, ast_expression lhs, ast_expression rhs)
 {
@@ -84,6 +110,8 @@ void ast_binary_op_destroy(ast_binary_op *op)
     ast_expression_destroy(op->rhs);
     free(op);
 }
+
+/* AST ENCLOSED EXPRESSSION */
 
 ast_enclosed_expr *ast_enclosed_expr_alloc(ast_expression expr)
 {

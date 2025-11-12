@@ -4,7 +4,6 @@
 #include "symbol.h"
 #include <stdlib.h>
 
-
 typedef struct runtime_val_storage_entry
 {
     symbol_ptr id;
@@ -76,8 +75,23 @@ void push_runtime_value(symbol_ptr s, runtime_val v)
     entry->val = v;
 }
 
-void push_runtime_scope() {}
-void pop_runtime_scope() {}
+void push_runtime_scope()
+{
+    if (runtime_val_storage_instace.scope_size == MAX_SCOPE_SIZE) {
+        fatal_error("Reached maximum scope size");
+    }
+    runtime_val_storage_instace.scope_delims[runtime_val_storage_instace.scope_size++]
+        = runtime_val_storage_instace.entry_size;
+}
+
+void pop_runtime_scope()
+{
+    if (runtime_val_storage_instace.scope_size == 0) {
+        fatal_error("Cannot pop scope: Not in scope");
+    }
+    runtime_val_storage_instace.entry_size
+        = runtime_val_storage_instace.scope_delims[--runtime_val_storage_instace.scope_size];
+}
 
 /* Static function definitions */
 
@@ -88,12 +102,11 @@ static void symbol_not_defined_error(symbol_ptr sym)
 
 static runtime_val_storage_entry* search_symbol_value(symbol_ptr s)
 {
-    size_t i = 0;
-    while (i < runtime_val_storage_instace.entry_size
-           && runtime_val_storage_instace.entries[i].id != s) {
-        ++i;
+    int i = runtime_val_storage_instace.entry_size - 1;
+    while (i >= 0 && runtime_val_storage_instace.entries[i].id != s) {
+        --i;
     }
-    if (i == runtime_val_storage_instace.entry_size) {
+    if (i < 0) {
         return NULL;
     }
     return &runtime_val_storage_instace.entries[i];

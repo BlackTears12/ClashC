@@ -11,16 +11,18 @@
 typedef enum ast_expr_type {
     AST_FCALL = 0,
     AST_COMMAND = 1,
+    AST_PIPE = 2,
     AST_LITERAL,
     AST_VARIABLE,
     AST_BINARYOP,
     AST_LIST,
-    AST_ENCLOSED,
+    AST_ENCLOSED
 } ast_expr_type;
 
 typedef union ast_expr_data {
     struct ast_fcall *fcall;
     struct ast_command *command;
+    struct ast_pipe *pipe;
     struct ast_literal *literal;
     struct ast_variable *variable;
     struct ast_binary_op *binary_op;
@@ -54,11 +56,21 @@ typedef struct ast_command
 {
     symbol_ptr cmd;
     vect_ast_expression *args;
+    bool in_backgnd;
 } ast_command;
 
 ast_command *ast_command_alloc(symbol_ptr cmd);
 void ast_command_destroy(ast_command *cmd);
 void ast_command_add_arg(ast_command *cmd, ast_expression arg);
+
+typedef struct ast_pipe
+{
+    ast_command *input;
+    ast_command *output;
+} ast_pipe;
+
+ast_pipe *ast_pipe_alloc(ast_command *input, ast_command *output);
+void ast_pipe_destroy(ast_pipe *pipe);
 
 #define AST_LITERAL_TYPE_AMOUNT 4
 

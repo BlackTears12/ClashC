@@ -21,6 +21,8 @@ ast_visit_result dispatch_expr_visitor(ast_expression expr, ast_visit_context *c
         return visitors->binary_op(expr.value.binary_op, cxt);
     case AST_COMMAND:
         return visitors->command(expr.value.command, cxt);
+    case AST_PIPE:
+        return visitors->pipe(expr.value.pipe, cxt);
     case AST_FCALL:
         return visitors->fcall(expr.value.fcall, cxt);
     case AST_LIST:
@@ -38,6 +40,8 @@ ast_visit_result dispatch_stmt_visitor(ast_statement stmt, ast_visit_context *cx
         return visitors->assignment(stmt.value.assignment, cxt);
     case AST_COMMAND_ST:
         return visitors->command(stmt.value.command, cxt);
+    case AST_PIPE_ST:
+        return visitors->pipe(stmt.value.pipe, cxt);
     case AST_FCALL_ST:
         return visitors->fcall(stmt.value.fcall, cxt);
     case AST_BLOCK:

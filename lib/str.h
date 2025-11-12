@@ -23,6 +23,11 @@ bool str_view_to_bool(str_view v);
 typedef str_view string_t;
 string_t str_new(char *str);
 void str_delete(string_t str);
+
+/* Concats @pre to @post without freeing them*/
 string_t str_concat(string_t pre, string_t post);
+
+/* Concats @pre to @post and deallocates them after*/
+string_t str_merge(string_t pre, string_t post);
 
 #endif
